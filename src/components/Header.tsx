@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom'
 const NAV = [
   { label: '首页', to: '/' },
   { label: '核心服务', to: '/services' },
-  { label: '申请流程', href: '/apply.html' },
+  { label: '申请流程', to: '/apply' },
   { label: '关于我们', to: '/about' },
   { label: '联系', to: '/contact' },
 ]
@@ -16,7 +16,7 @@ function NavItem({
   label: string
   to?: string
   href?: string
-}) {
+} & { label: string }) {
   if (href) {
     return (
       <a
