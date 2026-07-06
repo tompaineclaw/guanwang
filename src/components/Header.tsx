@@ -1,6 +1,6 @@
 import { NavLink } from 'react-router-dom'
 
-const NAV = [
+const NAV: NavItemProps[] = [
   { label: '首页', to: '/' },
   { label: '核心服务', to: '/services' },
   { label: '申请流程', to: '/apply' },
