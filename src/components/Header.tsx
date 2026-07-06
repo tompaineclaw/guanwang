@@ -1,5 +1,11 @@
 import { NavLink } from 'react-router-dom'
 
+type NavItemProps = {
+  label: string
+  to?: string
+  href?: string
+}
+
 const NAV: NavItemProps[] = [
   { label: '首页', to: '/' },
   { label: '核心服务', to: '/services' },
@@ -8,15 +14,7 @@ const NAV: NavItemProps[] = [
   { label: '联系', to: '/contact' },
 ]
 
-function NavItem({
-  label,
-  to,
-  href,
-}: {
-  label: string
-  to?: string
-  href?: string
-} & { label: string }) {
+function NavItem({ label, to, href }: NavItemProps) {
   if (href) {
     return (
       <a
