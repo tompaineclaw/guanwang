@@ -38,7 +38,7 @@ export default function Header() {
               to={n.to}
               end={n.to === '/'}
               className={({ isActive }) =>
-                `text-[13px] md:text-[15px] font-normal hover:text-blue-200 transition-colors whitespace-nowrap ${
+                `text-base md:text-lg font-normal hover:text-blue-200 transition-colors whitespace-nowrap ${
                   isActive ? 'text-white' : 'text-white/85'
                 }`
               }
