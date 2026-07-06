@@ -29,11 +29,16 @@ export default function Header() {
           <img
             src="/logo.png"
             alt="建峰亿腾科技"
-            className="w-10 h-10 object-contain group-hover:scale-105 transition-transform"
+            className="w-9 h-9 rounded-lg object-cover shadow-[0_0_0_1px_rgba(205,221,255,0.12),0_2px_8px_rgba(0,0,0,0.3)] group-hover:scale-105 transition-transform"
             draggable={false}
           />
-          <span className="text-white font-bold text-lg leading-none whitespace-nowrap">
-            建峰亿腾科技
+          <span className="flex flex-col leading-tight gap-px">
+            <span className="text-white font-bold text-base whitespace-nowrap">
+              建峰亿腾科技
+            </span>
+            <span className="text-[10px] font-medium text-white/55 tracking-[0.08em] whitespace-nowrap">
+              JianfengYiteng Tech
+            </span>
           </span>
         </Link>
 
@@ -44,20 +49,14 @@ export default function Header() {
               to={n.to}
               end={n.to === '/'}
               className={({ isActive }) =>
-                `font-medium text-[15px] hover:opacity-80 transition-opacity ${
-                  isActive ? 'text-white' : 'text-white/80'
+                `text-[15px] font-normal hover:text-blue-200 transition-colors ${
+                  isActive ? 'text-white' : 'text-white/85'
                 }`
               }
             >
               {n.label}
             </NavLink>
           ))}
-          <a
-            href="/apply.html"
-            className="ml-2 inline-flex items-center gap-1 px-5 py-2 rounded-full bg-white text-black text-sm font-semibold hover:bg-white/90 transition-colors"
-          >
-            申请入驻
-          </a>
         </nav>
 
         <button
@@ -80,21 +79,14 @@ export default function Header() {
                 end={n.to === '/'}
                 onClick={close}
                 className={({ isActive }) =>
-                  `text-base font-medium hover:opacity-80 transition-opacity ${
-                    isActive ? 'text-white' : 'text-white/80'
+                  `text-base font-normal hover:text-blue-200 transition-colors ${
+                    isActive ? 'text-white' : 'text-white/85'
                   }`
                 }
               >
                 {n.label}
               </NavLink>
             ))}
-            <a
-              href="/apply.html"
-              onClick={close}
-              className="mt-1 inline-flex items-center justify-center gap-1 px-5 py-2.5 rounded-full bg-white text-black text-sm font-semibold self-start"
-            >
-              申请入驻
-            </a>
           </nav>
         </div>
       )}
