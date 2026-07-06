@@ -9,11 +9,22 @@ export default defineConfig({
     host: true,
   },
   build: {
+    cssCodeSplit: true,
+    sourcemap: false,
     rollupOptions: {
       output: {
         entryFileNames: 'assets/app.js',
-        chunkFileNames: 'assets/[name].js',
-        assetFileNames: 'assets/[name][extname]',
+        chunkFileNames: 'assets/[name]-[hash].js',
+        assetFileNames: ({ name }) => {
+          if (/\.(png|jpe?g|webp|svg|gif|avif|ico)$/i.test(name ?? '')) {
+            return 'assets/images/[name]-[hash][extname]'
+          }
+          return 'assets/[name][extname]'
+        },
+        manualChunks: {
+          'react-vendor': ['react', 'react-dom', 'react-router-dom'],
+          'helmet-vendor': ['react-helmet-async'],
+        },
       },
     },
   },

@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom'
+import Logo from './Logo'
 
 function SoonLink({ label }: { label: string }) {
   return (
@@ -18,7 +19,7 @@ export default function Footer() {
         <div className="grid grid-cols-2 md:grid-cols-4 gap-10">
           <div className="col-span-2 md:col-span-1">
             <Link to="/" className="flex items-center gap-3 group">
-              <img src="/logo.png" alt="建峰亿腾科技" className="w-10 h-10 object-contain" />
+              <Logo size={40} className="object-contain" />
               <span className="flex flex-col">
                 <span className="text-white font-bold leading-none">建峰亿腾科技</span>
                 <span className="text-white/60 text-xs leading-none mt-1">JianfengYiteng Tech</span>
@@ -45,7 +46,7 @@ export default function Footer() {
             <h4 className="text-white font-semibold mb-4 text-sm">公司</h4>
             <ul className="space-y-2.5 text-sm">
               <li><Link to="/about" className="text-white/70 hover:text-white">关于我们</Link></li>
-              <li><a href="/apply.html" className="text-white/70 hover:text-white">申请入驻</a></li>
+              <li><Link to="/apply" className="text-white/70 hover:text-white">申请入驻</Link></li>
               <li><Link to="/contact" className="text-white/70 hover:text-white">联系我们</Link></li>
               <li><a href="mailto:hr@jfyt.com.cn" className="text-white/70 hover:text-white">加入我们</a></li>
             </ul>

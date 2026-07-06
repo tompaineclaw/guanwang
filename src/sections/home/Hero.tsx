@@ -1,6 +1,8 @@
 import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 export default function Hero() {
+  const navigate = useNavigate()
   const [phone, setPhone] = useState('')
   return (
     <section className="relative min-h-[80vh] flex items-center justify-center px-6 md:px-10 py-24 md:py-32">
@@ -26,7 +28,7 @@ export default function Hero() {
           <form
             onSubmit={(e) => {
               e.preventDefault()
-              window.location.href = '/apply.html'
+              navigate('/apply')
             }}
             className="flex flex-col sm:flex-row gap-3 w-full"
           >

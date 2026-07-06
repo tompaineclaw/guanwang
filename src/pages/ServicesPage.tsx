@@ -1,4 +1,4 @@
-import { Helmet } from 'react-helmet-async'
+import SEO from '../components/SEO'
 import ServiceHero from '../sections/services/ServiceHero'
 import ServiceDetail from '../sections/services/ServiceDetail'
 import Packages from '../sections/services/Packages'
@@ -99,13 +99,11 @@ const SERVICES = [
 export default function ServicesPage() {
   return (
     <>
-      <Helmet>
-        <title>核心服务 · 建峰亿腾科技</title>
-        <meta
-          name="description"
-          content="建峰亿腾科技为 OPC 一人公司提供 6 大核心孵化服务：认知培训、公司注册、AI 工具栈、私域社群、订单对接、财税法务。"
-        />
-      </Helmet>
+      <SEO
+        title="核心服务"
+        description="建峰亿腾科技为 OPC 一人公司提供 6 大核心孵化服务：认知培训、公司注册、AI 工具栈、私域社群、订单对接、财税法务。"
+        path="/services"
+      />
 
       <ServiceHero />
       {SERVICES.map((s) => (

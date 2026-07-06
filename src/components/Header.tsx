@@ -1,4 +1,5 @@
 import { NavLink, Link } from 'react-router-dom'
+import Logo from './Logo'
 
 type NavItemProps = {
   label: string
@@ -48,11 +49,9 @@ export default function Header() {
           to="/"
           className="flex items-center gap-3 shrink-0 group"
         >
-          <img
-            src="/logo.png"
-            alt="建峰亿腾科技"
-            className="w-9 h-9 rounded-lg object-cover shadow-[0_0_0_1px_rgba(205,221,255,0.12),0_2px_8px_rgba(0,0,0,0.3)] group-hover:scale-105 transition-transform"
-            draggable={false}
+          <Logo
+            size={36}
+            className="rounded-lg shadow-[0_0_0_1px_rgba(205,221,255,0.12),0_2px_8px_rgba(0,0,0,0.3)] group-hover:scale-105 transition-transform"
           />
           <span className="flex flex-col leading-tight gap-px">
             <span className="text-white font-bold text-base whitespace-nowrap">
