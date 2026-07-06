@@ -10,10 +10,11 @@ const NAV = [
 
 function HamburgerIcon() {
   return (
-    <span className="relative block w-4 h-[1.5px] bg-white/85">
-      <span className="absolute left-0 -top-[5px] w-4 h-[1.5px] bg-white/85" />
-      <span className="absolute left-0 top-[5px] w-4 h-[1.5px] bg-white/85" />
-    </span>
+    <svg width="16" height="12" viewBox="0 0 16 12" fill="none" aria-hidden="true">
+      <line x1="0" y1="1" x2="16" y2="1" stroke="currentColor" strokeWidth="1.5" />
+      <line x1="0" y1="6" x2="16" y2="6" stroke="currentColor" strokeWidth="1.5" />
+      <line x1="0" y1="11" x2="16" y2="11" stroke="currentColor" strokeWidth="1.5" />
+    </svg>
   )
 }
 
@@ -63,7 +64,7 @@ export default function Header() {
           type="button"
           aria-label="菜单"
           onClick={() => setOpen((v) => !v)}
-          className="md:hidden w-10 h-10 rounded-full border border-white/20 hover:border-white/40 inline-flex items-center justify-center transition-colors"
+          className="md:hidden shrink-0 w-10 h-10 rounded-full border border-white/20 hover:border-white/40 text-white inline-flex items-center justify-center transition-colors"
         >
           <HamburgerIcon />
         </button>
