@@ -10,10 +10,19 @@ const NAV = [
 
 function HamburgerIcon() {
   return (
-    <svg width="16" height="12" viewBox="0 0 16 12" fill="none" aria-hidden="true">
-      <line x1="0" y1="1" x2="16" y2="1" stroke="currentColor" strokeWidth="1.5" />
-      <line x1="0" y1="6" x2="16" y2="6" stroke="currentColor" strokeWidth="1.5" />
-      <line x1="0" y1="11" x2="16" y2="11" stroke="currentColor" strokeWidth="1.5" />
+    <svg
+      width="20"
+      height="14"
+      viewBox="0 0 20 14"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.5"
+      style={{ display: 'block' }}
+      aria-hidden="true"
+    >
+      <line x1="0" y1="1" x2="20" y2="1" />
+      <line x1="0" y1="7" x2="20" y2="7" />
+      <line x1="0" y1="13" x2="20" y2="13" />
     </svg>
   )
 }
@@ -25,8 +34,12 @@ export default function Header() {
 
   return (
     <header className="sticky top-0 z-30 backdrop-blur-md bg-black/40 border-b border-white/10 relative">
-      <div className="max-w-[1280px] mx-auto px-6 md:px-10 py-4 flex items-center justify-between">
-        <Link to="/" className="flex items-center gap-3 shrink-0 group" onClick={close}>
+      <div className="max-w-[1280px] mx-auto px-6 md:px-10 py-4 flex items-center justify-between gap-4">
+        <Link
+          to="/"
+          className="flex items-center gap-3 shrink-0 group"
+          onClick={close}
+        >
           <img
             src="/logo.png"
             alt="建峰亿腾科技"
@@ -64,7 +77,8 @@ export default function Header() {
           type="button"
           aria-label="菜单"
           onClick={() => setOpen((v) => !v)}
-          className="md:hidden shrink-0 w-10 h-10 rounded-full border border-white/20 hover:border-white/40 text-white inline-flex items-center justify-center transition-colors"
+          style={{ width: 40, height: 40 }}
+          className="md:hidden flex-none rounded-full border border-white/20 hover:border-white/40 text-white inline-flex items-center justify-center transition-colors"
         >
           <HamburgerIcon />
         </button>
