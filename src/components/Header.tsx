@@ -1,4 +1,4 @@
-import { NavLink } from 'react-router-dom'
+import { NavLink, Link } from 'react-router-dom'
 
 type NavItemProps = {
   label: string
@@ -44,8 +44,8 @@ export default function Header() {
   return (
     <header className="sticky top-0 z-30 backdrop-blur-md bg-black/40 border-b border-white/10">
       <div className="max-w-[1280px] mx-auto px-4 md:px-10 py-4 flex items-center justify-between gap-3 md:gap-6">
-        <a
-          href="https://jianfengyiteng.com.cn/index.html"
+        <Link
+          to="/"
           className="flex items-center gap-3 shrink-0 group"
         >
           <img
@@ -62,7 +62,7 @@ export default function Header() {
               JianfengYiteng Tech
             </span>
           </span>
-        </a>
+        </Link>
 
         <nav className="flex items-center gap-3 md:gap-8 flex-wrap justify-end">
           {NAV.map((n) => (
