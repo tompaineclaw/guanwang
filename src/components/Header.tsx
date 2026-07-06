@@ -3,9 +3,44 @@ import { NavLink } from 'react-router-dom'
 const NAV = [
   { label: '首页', to: '/' },
   { label: '核心服务', to: '/services' },
+  { label: '申请流程', href: '/apply.html' },
   { label: '关于我们', to: '/about' },
   { label: '联系', to: '/contact' },
 ]
+
+function NavItem({
+  label,
+  to,
+  href,
+}: {
+  label: string
+  to?: string
+  href?: string
+}) {
+  if (href) {
+    return (
+      <a
+        href={href}
+        className="text-base md:text-lg font-medium text-white/85 hover:text-blue-200 transition-colors whitespace-nowrap"
+      >
+        {label}
+      </a>
+    )
+  }
+  return (
+    <NavLink
+      to={to!}
+      end={to === '/'}
+      className={({ isActive }) =>
+        `text-base md:text-lg font-medium hover:text-blue-200 transition-colors whitespace-nowrap ${
+          isActive ? 'text-white' : 'text-white/85'
+        }`
+      }
+    >
+      {label}
+    </NavLink>
+  )
+}
 
 export default function Header() {
   return (
@@ -33,18 +68,12 @@ export default function Header() {
 
         <nav className="flex items-center gap-3 md:gap-8 flex-wrap justify-end">
           {NAV.map((n) => (
-            <NavLink
-              key={n.to}
+            <NavItem
+              key={n.label}
+              label={n.label}
               to={n.to}
-              end={n.to === '/'}
-              className={({ isActive }) =>
-                `text-base md:text-lg font-medium hover:text-blue-200 transition-colors whitespace-nowrap ${
-                  isActive ? 'text-white' : 'text-white/85'
-                }`
-              }
-            >
-              {n.label}
-            </NavLink>
+              href={n.href}
+            />
           ))}
         </nav>
       </div>
