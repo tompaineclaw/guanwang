@@ -9,7 +9,7 @@ export default function ContactHero() {
           </span>
         </div>
         <h1 className="text-5xl md:text-7xl font-black tracking-tight leading-[1.05] text-white mb-6">
-          找到对的人，
+          找到对的人
           <br />
           聊对的事
         </h1>
