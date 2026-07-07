@@ -29,11 +29,15 @@ export default function Hero() {
         </div>
 
         <h1 className="text-5xl md:text-7xl lg:text-8xl font-black tracking-tight leading-[1.05] text-white">
-          AI 时代，一人即公司
+          建峰亿腾科技
         </h1>
 
         <p className="text-xl md:text-2xl text-blue-200 tracking-[0.02em]">
-          <strong className="font-semibold">建峰亿腾科技专注 OPC 一人公司孵化。从认知、注册、AI 工具栈到首批客户，我们陪你从 0 到 1。</strong>
+          <strong className="font-semibold">AI 时代，一人即公司</strong>
+        </p>
+
+        <p className="text-base md:text-lg text-white/70 leading-relaxed max-w-2xl">
+          建峰亿腾科技专注 OPC 一人公司孵化。从认知、注册、AI 工具栈到首批客户，我们陪你从 0 到 1。
         </p>
 
         <div className="w-full max-w-[480px]">
