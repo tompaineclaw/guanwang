@@ -1,4 +1,6 @@
 import { useState, type FormEvent } from 'react'
+import { Link } from 'react-router-dom'
+import { useSearchParams } from 'react-router-dom'
 
 function CheckIcon() {
   return (
@@ -20,6 +22,8 @@ export default function ApplyForm() {
   const [submitting, setSubmitting] = useState(false)
   const [error, setError] = useState('')
   const [success, setSuccess] = useState(false)
+  const [searchParams] = useSearchParams()
+  const initialPhone = searchParams.get('phone') || ''
 
   async function onSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault()
@@ -28,6 +32,12 @@ export default function ApplyForm() {
     const form = e.currentTarget
     const data = new FormData(form)
     const payload = Object.fromEntries(data.entries())
+    // honeypot: 机器人会填，正常用户不会
+    if (payload.website) {
+      form.reset()
+      setSuccess(true)
+      return
+    }
     if (!payload.name || !payload.phone || !payload.email || !payload.project || !payload.category || !payload.stage || !payload.description) {
       setError('请填写所有必填项后再提交。')
       return
@@ -77,14 +87,16 @@ export default function ApplyForm() {
 
             <p className="mt-8 text-sm text-white/65 leading-relaxed">
               申请前有任何疑问？欢迎
-              <a href="/#/contact" className="text-blue-300 underline hover:text-blue-200 mx-1">
+              <Link to="/contact" className="text-blue-300 underline hover:text-blue-200 mx-1">
                 联系我们的入驻顾问
-              </a>
+              </Link>
               ，我们很乐意先聊一聊。
             </p>
           </div>
 
           <form onSubmit={onSubmit} noValidate className="bg-white/[0.04] border border-white/10 rounded-2xl p-7 md:p-8 space-y-4">
+            {/* honeypot: 人类看不见，机器人会填 */}
+            <input type="text" name="website" tabIndex={-1} autoComplete="off" className="hidden" aria-hidden="true" />
             <div className="grid md:grid-cols-2 gap-4">
               <div>
                 <label className="block text-sm text-white/80 mb-2">
@@ -97,8 +109,9 @@ export default function ApplyForm() {
                 <label className="block text-sm text-white/80 mb-2">
                   联系电话 <span className="text-red-400">*</span>
                 </label>
-                <input type="tel" name="phone" required placeholder="11 位手机号"
-                  className="w-full px-4 py-2.5 rounded-lg bg-white/[0.04] border border-white/15 text-white placeholder-white/35 focus:border-blue-300/60 focus:outline-none transition-colors" />
+            <input type="tel" name="phone" required placeholder="11 位手机号"
+              defaultValue={initialPhone}
+              className="w-full px-4 py-2.5 rounded-lg bg-white/[0.04] border border-white/15 text-white placeholder-white/35 focus:border-blue-300/60 focus:outline-none transition-colors" />
               </div>
             </div>
 

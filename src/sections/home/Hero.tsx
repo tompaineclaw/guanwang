@@ -28,7 +28,8 @@ export default function Hero() {
           <form
             onSubmit={(e) => {
               e.preventDefault()
-              navigate('/apply')
+              const params = phone.trim() ? `?phone=${encodeURIComponent(phone.trim())}` : ''
+              navigate(`/apply${params}`)
             }}
             className="flex flex-col sm:flex-row gap-3 w-full"
           >

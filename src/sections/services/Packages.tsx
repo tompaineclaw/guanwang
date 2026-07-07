@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom'
+
 const PACKAGES = [
   {
     name: '启航版',
@@ -5,7 +7,7 @@ const PACKAGES = [
     duration: '12 个月',
     desc: '适合刚启动的独立创业者。认知培训 + 公司注册 0 费 + 私域社群基础版 + 财税代办首年免费。',
     cta: '立即申请',
-    href: '/apply.html',
+    href: '/apply',
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" className="w-6 h-6">
         <path d="M12 2v20M2 12h20" />
@@ -18,7 +20,7 @@ const PACKAGES = [
     duration: '24 个月',
     desc: '适合已有 MVP 的团队。在启航版基础上加 AI 工具栈配置 + 订单对接优先权 + 创始人俱乐部核心会员。',
     cta: '立即申请',
-    href: '/apply.html',
+    href: '/apply',
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" className="w-6 h-6">
         <path d="M3 12l9-9 9 9M5 10v10h14V10" />
@@ -74,13 +76,13 @@ export default function Packages() {
               <h3 className="text-xl font-bold text-white mb-2">
                 {p.name} · <span className="text-blue-300">{p.price}</span> / {p.duration}
               </h3>
-              <p className="text-sm text-white/70 leading-relaxed mb-6 flex-1">{p.desc}</p>
-              <a
-                href={p.href}
-                className="inline-flex items-center gap-1.5 text-sm text-blue-300 hover:text-blue-200 font-medium"
-              >
-                {p.cta} <Arrow />
-              </a>
+            <p className="text-sm text-white/70 leading-relaxed mb-6 flex-1">{p.desc}</p>
+            <Link
+              to={p.href}
+              className="inline-flex items-center gap-1.5 text-sm text-blue-300 hover:text-blue-200 font-medium"
+            >
+              {p.cta} <Arrow />
+            </Link>
             </article>
           ))}
         </div>

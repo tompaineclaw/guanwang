@@ -1,4 +1,5 @@
 import { useState, type FormEvent } from 'react'
+import { Link } from 'react-router-dom'
 
 function Arrow() {
   return (
@@ -27,6 +28,12 @@ export default function ContactForm() {
     const form = e.currentTarget
     const data = new FormData(form)
     const payload = Object.fromEntries(data.entries())
+    // honeypot: 机器人会填，正常用户不会
+    if (payload.website) {
+      form.reset()
+      setSuccess(true)
+      return
+    }
     if (!payload.name || !payload.email || !payload.type || !payload.message) {
       setError('请填写所有必填项后再提交。')
       return
@@ -76,12 +83,21 @@ export default function ContactForm() {
                     <span className="text-blue-300 shrink-0">
                       <Arrow />
                     </span>
-                    <a
-                      href={s.href}
-                      className="hover:text-blue-300 transition-colors"
-                    >
-                      {s.label} →
-                    </a>
+                    {s.href.startsWith('mailto:') ? (
+                      <a
+                        href={s.href}
+                        className="hover:text-blue-300 transition-colors"
+                      >
+                        {s.label} →
+                      </a>
+                    ) : (
+                      <Link
+                        to={s.href}
+                        className="hover:text-blue-300 transition-colors"
+                      >
+                        {s.label} →
+                      </Link>
+                    )}
                   </li>
                 ))}
               </ul>
@@ -89,6 +105,8 @@ export default function ContactForm() {
           </div>
 
           <form onSubmit={onSubmit} noValidate className="bg-white/[0.04] border border-white/10 rounded-2xl p-7 md:p-8 space-y-5">
+            {/* honeypot: 人类看不见，机器人会填 */}
+            <input type="text" name="website" tabIndex={-1} autoComplete="off" className="hidden" aria-hidden="true" />
             <div className="grid md:grid-cols-2 gap-4">
               <div>
                 <label className="block text-sm text-white/80 mb-2">

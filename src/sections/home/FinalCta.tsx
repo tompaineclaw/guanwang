@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom'
+
 export default function FinalCta() {
   return (
     <section className="py-24 md:py-32">
@@ -14,12 +16,12 @@ export default function FinalCta() {
           我们准备好了全流程陪跑。剩下的，只需要你。
         </p>
         <div className="flex flex-col sm:flex-row gap-3 justify-center">
-          <a
-            href="/apply.html"
+          <Link
+            to="/apply"
             className="px-8 py-4 rounded-full bg-white text-black font-bold hover:bg-white/90 transition-colors"
           >
             申请入驻 OPC
-          </a>
+          </Link>
           <a
             href="/services"
             className="px-8 py-4 rounded-full border border-white/30 text-white font-bold hover:bg-white/10 transition-colors"
