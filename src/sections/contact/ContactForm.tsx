@@ -10,7 +10,7 @@ function Arrow() {
 }
 
 const SPECIAL = [
-  { label: '申请入驻咨询', href: '/apply.html' },
+  { label: '申请入驻咨询', href: '/apply' },
   { label: '商务合作 (bd@jfyt.com.cn)', href: 'mailto:bd@jfyt.com.cn' },
   { label: '加入团队 (hr@jfyt.com.cn)', href: 'mailto:hr@jfyt.com.cn' },
   { label: '媒体采访 (press@jfyt.com.cn)', href: 'mailto:press@jfyt.com.cn' },
