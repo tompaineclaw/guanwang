@@ -1,6 +1,18 @@
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 
 export default function FinalCta() {
+  const location = useLocation()
+  const isApplyPage = location.pathname === '/apply'
+
+  function handleApplyClick(e: React.MouseEvent) {
+    // 在 /apply 页面点击时，Link 默认不会触发滚动
+    // 手动拦截，平滑滚动到页面顶部
+    if (isApplyPage) {
+      e.preventDefault()
+      window.scrollTo({ top: 0, behavior: 'smooth' })
+    }
+  }
+
   return (
     <section className="py-24 md:py-32">
       <div className="max-w-3xl mx-auto px-6 md:px-10 text-center">
@@ -18,6 +30,7 @@ export default function FinalCta() {
         <div className="flex flex-col sm:flex-row gap-3 justify-center">
           <Link
             to="/apply"
+            onClick={handleApplyClick}
             className="px-8 py-4 rounded-full bg-white text-black font-bold hover:bg-white/90 transition-colors"
           >
             申请入驻 OPC
