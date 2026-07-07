@@ -12,7 +12,7 @@ const NAV: NavItemProps[] = [
   { label: '核心服务', to: '/services' },
   { label: '申请流程', to: '/apply' },
   { label: '关于我们', to: '/about' },
-  { label: '联系', to: '/contact' },
+  { label: '联系我们', to: '/contact' },
 ]
 
 function NavItem({ label, to, href }: NavItemProps) {
