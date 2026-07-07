@@ -18,6 +18,8 @@ const CHECKLIST = [
   '长期主义，把 OPC 当作事业而非 quick win',
 ]
 
+const PHONE_RE = /^\d{11}$/
+
 export default function ApplyForm() {
   const [submitting, setSubmitting] = useState(false)
   const [error, setError] = useState('')
@@ -40,6 +42,10 @@ export default function ApplyForm() {
     }
     if (!payload.name || !payload.phone || !payload.email || !payload.project || !payload.category || !payload.stage || !payload.description) {
       setError('请填写所有必填项后再提交。')
+      return
+    }
+    if (typeof payload.phone === 'string' && !PHONE_RE.test(payload.phone)) {
+      setError('手机号必须为 11 位数字。')
       return
     }
     setSubmitting(true)
@@ -99,44 +105,46 @@ export default function ApplyForm() {
             <input type="text" name="website" tabIndex={-1} autoComplete="off" className="hidden" aria-hidden="true" />
             <div className="grid md:grid-cols-2 gap-4">
               <div>
-                <label className="block text-sm text-white/80 mb-2">
+                <label htmlFor="apply-name" className="block text-sm text-white/80 mb-2">
                   姓名 <span className="text-red-400">*</span>
                 </label>
-                <input type="text" name="name" required placeholder="请输入真实姓名"
+                <input id="apply-name" type="text" name="name" required placeholder="请输入真实姓名"
                   className="w-full px-4 py-2.5 rounded-lg bg-white/[0.04] border border-white/15 text-white placeholder-white/35 focus:border-blue-300/60 focus:outline-none transition-colors" />
               </div>
               <div>
-                <label className="block text-sm text-white/80 mb-2">
+                <label htmlFor="apply-phone" className="block text-sm text-white/80 mb-2">
                   联系电话 <span className="text-red-400">*</span>
                 </label>
-            <input type="tel" name="phone" required placeholder="11 位手机号"
-              defaultValue={initialPhone}
-              className="w-full px-4 py-2.5 rounded-lg bg-white/[0.04] border border-white/15 text-white placeholder-white/35 focus:border-blue-300/60 focus:outline-none transition-colors" />
+                <input id="apply-phone" type="tel" name="phone" required placeholder="11 位手机号"
+                  defaultValue={initialPhone}
+                  maxLength={11}
+                  inputMode="numeric"
+                  className="w-full px-4 py-2.5 rounded-lg bg-white/[0.04] border border-white/15 text-white placeholder-white/35 focus:border-blue-300/60 focus:outline-none transition-colors" />
               </div>
             </div>
 
             <div>
-              <label className="block text-sm text-white/80 mb-2">
+              <label htmlFor="apply-email" className="block text-sm text-white/80 mb-2">
                 电子邮箱 <span className="text-red-400">*</span>
               </label>
-              <input type="email" name="email" required placeholder="example@yourdomain.com"
+              <input id="apply-email" type="email" name="email" required placeholder="example@yourdomain.com"
                 className="w-full px-4 py-2.5 rounded-lg bg-white/[0.04] border border-white/15 text-white placeholder-white/35 focus:border-blue-300/60 focus:outline-none transition-colors" />
             </div>
 
             <div>
-              <label className="block text-sm text-white/80 mb-2">
+              <label htmlFor="apply-project" className="block text-sm text-white/80 mb-2">
                 项目名称 <span className="text-red-400">*</span>
               </label>
-              <input type="text" name="project" required placeholder="一句话概括你的项目"
+              <input id="apply-project" type="text" name="project" required placeholder="一句话概括你的项目"
                 className="w-full px-4 py-2.5 rounded-lg bg-white/[0.04] border border-white/15 text-white placeholder-white/35 focus:border-blue-300/60 focus:outline-none transition-colors" />
             </div>
 
             <div className="grid md:grid-cols-2 gap-4">
               <div>
-                <label className="block text-sm text-white/80 mb-2">
+                <label htmlFor="apply-category" className="block text-sm text-white/80 mb-2">
                   项目方向 <span className="text-red-400">*</span>
                 </label>
-                <select name="category" required defaultValue=""
+                <select id="apply-category" name="category" required defaultValue=""
                   className="w-full px-4 py-2.5 rounded-lg bg-white/[0.04] border border-white/15 text-white focus:border-blue-300/60 focus:outline-none transition-colors">
                   <option value="" disabled className="bg-[#0c0c0c]">请选择</option>
                   <option className="bg-[#0c0c0c]">AI 工具 / 应用</option>
@@ -148,10 +156,10 @@ export default function ApplyForm() {
                 </select>
               </div>
               <div>
-                <label className="block text-sm text-white/80 mb-2">
+                <label htmlFor="apply-stage" className="block text-sm text-white/80 mb-2">
                   当前阶段 <span className="text-red-400">*</span>
                 </label>
-                <select name="stage" required defaultValue=""
+                <select id="apply-stage" name="stage" required defaultValue=""
                   className="w-full px-4 py-2.5 rounded-lg bg-white/[0.04] border border-white/15 text-white focus:border-blue-300/60 focus:outline-none transition-colors">
                   <option value="" disabled className="bg-[#0c0c0c]">请选择</option>
                   <option className="bg-[#0c0c0c]">仅想法</option>
@@ -164,20 +172,20 @@ export default function ApplyForm() {
             </div>
 
             <div>
-              <label className="block text-sm text-white/80 mb-2">
+              <label htmlFor="apply-description" className="block text-sm text-white/80 mb-2">
                 项目描述 <span className="text-red-400">*</span>
               </label>
-              <textarea name="description" required rows={5}
+              <textarea id="apply-description" name="description" required rows={5}
                 placeholder="1) 你目前的状态（在职/自由职业/副业）2) 你想做的 OPC 方向 3) 你有什么独特优势 4) 6 个月后你想达成什么"
                 className="w-full px-4 py-2.5 rounded-lg bg-white/[0.04] border border-white/15 text-white placeholder-white/35 focus:border-blue-300/60 focus:outline-none transition-colors resize-y" />
               <p className="mt-1.5 text-xs text-white/50">提示：具体、生动的项目描述会比漂亮话术更有说服力。</p>
             </div>
 
             <div>
-              <label className="block text-sm text-white/80 mb-2">
+              <label htmlFor="apply-link" className="block text-sm text-white/80 mb-2">
                 项目链接（选填）
               </label>
-              <input type="url" name="link" placeholder="https:// 你的产品 / 仓库 / 文档"
+              <input id="apply-link" type="url" name="link" placeholder="https:// 你的产品 / 仓库 / 文档"
                 className="w-full px-4 py-2.5 rounded-lg bg-white/[0.04] border border-white/15 text-white placeholder-white/35 focus:border-blue-300/60 focus:outline-none transition-colors" />
             </div>
 

@@ -16,6 +16,8 @@ const SPECIAL = [
   { label: '媒体采访 (press@jfyt.com.cn)', href: 'mailto:press@jfyt.com.cn' },
 ]
 
+const PHONE_RE = /^\d{11}$/
+
 export default function ContactForm() {
   const [submitting, setSubmitting] = useState(false)
   const [error, setError] = useState('')
@@ -36,6 +38,10 @@ export default function ContactForm() {
     }
     if (!payload.name || !payload.email || !payload.type || !payload.message) {
       setError('请填写所有必填项后再提交。')
+      return
+    }
+    if (payload.phone && typeof payload.phone === 'string' && payload.phone.trim() && !PHONE_RE.test(payload.phone)) {
+      setError('电话必须为 11 位手机号（选填时可不填）。')
       return
     }
     setSubmitting(true)
@@ -109,10 +115,11 @@ export default function ContactForm() {
             <input type="text" name="website" tabIndex={-1} autoComplete="off" className="hidden" aria-hidden="true" />
             <div className="grid md:grid-cols-2 gap-4">
               <div>
-                <label className="block text-sm text-white/80 mb-2">
+                <label htmlFor="contact-name" className="block text-sm text-white/80 mb-2">
                   姓名 <span className="text-red-400">*</span>
                 </label>
                 <input
+                  id="contact-name"
                   type="text"
                   name="name"
                   required
@@ -121,10 +128,11 @@ export default function ContactForm() {
                 />
               </div>
               <div>
-                <label className="block text-sm text-white/80 mb-2">
+                <label htmlFor="contact-company" className="block text-sm text-white/80 mb-2">
                   公司 / 角色（选填）
                 </label>
                 <input
+                  id="contact-company"
                   type="text"
                   name="company"
                   placeholder="如：某某科技 · 创始人"
@@ -135,10 +143,11 @@ export default function ContactForm() {
 
             <div className="grid md:grid-cols-2 gap-4">
               <div>
-                <label className="block text-sm text-white/80 mb-2">
+                <label htmlFor="contact-email" className="block text-sm text-white/80 mb-2">
                   邮箱 <span className="text-red-400">*</span>
                 </label>
                 <input
+                  id="contact-email"
                   type="email"
                   name="email"
                   required
@@ -147,21 +156,25 @@ export default function ContactForm() {
                 />
               </div>
               <div>
-                <label className="block text-sm text-white/80 mb-2">电话（选填）</label>
+                <label htmlFor="contact-phone" className="block text-sm text-white/80 mb-2">电话（选填）</label>
                 <input
+                  id="contact-phone"
                   type="tel"
                   name="phone"
                   placeholder="11 位手机号"
+                  maxLength={11}
+                  inputMode="numeric"
                   className="w-full px-4 py-2.5 rounded-lg bg-white/[0.04] border border-white/15 text-white placeholder-white/35 focus:border-blue-300/60 focus:outline-none transition-colors"
                 />
               </div>
             </div>
 
             <div>
-              <label className="block text-sm text-white/80 mb-2">
+              <label htmlFor="contact-type" className="block text-sm text-white/80 mb-2">
                 咨询类型 <span className="text-red-400">*</span>
               </label>
               <select
+                id="contact-type"
                 name="type"
                 required
                 defaultValue=""
@@ -178,10 +191,11 @@ export default function ContactForm() {
             </div>
 
             <div>
-              <label className="block text-sm text-white/80 mb-2">
+              <label htmlFor="contact-message" className="block text-sm text-white/80 mb-2">
                 留言 <span className="text-red-400">*</span>
               </label>
               <textarea
+                id="contact-message"
                 name="message"
                 required
                 rows={5}
@@ -208,7 +222,7 @@ export default function ContactForm() {
             )}
             {success && (
               <div className="text-sm text-green-300 bg-green-500/10 border border-green-400/20 rounded-lg px-4 py-3">
-                ✓ 消息已发送！我们会尽快通过邮件回复你。
+                ✓ 消息已发送！我们会在 24 小时内通过邮件回复你。
               </div>
             )}
           </form>

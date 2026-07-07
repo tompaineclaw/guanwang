@@ -1,9 +1,25 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
+const PHONE_RE = /^\d{11}$/
+
 export default function Hero() {
   const navigate = useNavigate()
   const [phone, setPhone] = useState('')
+  const [error, setError] = useState('')
+
+  function onSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault()
+    setError('')
+    const trimmed = phone.trim()
+    if (trimmed && !PHONE_RE.test(trimmed)) {
+      setError('请输入 11 位手机号')
+      return
+    }
+    const params = trimmed ? `?phone=${encodeURIComponent(trimmed)}` : ''
+    navigate(`/apply${params}`)
+  }
+
   return (
     <section className="relative min-h-[80vh] flex items-center justify-center px-6 md:px-10 py-24 md:py-32">
       <div className="w-full max-w-[900px] mx-auto flex flex-col items-center text-center gap-8 md:gap-10">
@@ -25,22 +41,18 @@ export default function Hero() {
         </p>
 
         <div className="w-full max-w-[480px]">
-          <form
-            onSubmit={(e) => {
-              e.preventDefault()
-              const params = phone.trim() ? `?phone=${encodeURIComponent(phone.trim())}` : ''
-              navigate(`/apply${params}`)
-            }}
-            className="flex flex-col sm:flex-row gap-3 w-full"
-          >
+          <form onSubmit={onSubmit} className="flex flex-col sm:flex-row gap-3 w-full">
+            <label htmlFor="hero-phone" className="sr-only">手机号</label>
             <input
+              id="hero-phone"
               type="tel"
+              inputMode="numeric"
               value={phone}
-              onChange={(e) => setPhone(e.target.value)}
+              onChange={(e) => setPhone(e.target.value.replace(/\D/g, '').slice(0, 11))}
               placeholder="输入你的手机号，开启 OPC 之旅"
-              pattern="[0-9]{11}"
               maxLength={11}
-              required
+              aria-invalid={error ? 'true' : 'false'}
+              aria-describedby={error ? 'hero-phone-error' : undefined}
               className="flex-1 px-5 py-3.5 rounded-full bg-white/10 backdrop-blur border border-white/25 text-white placeholder:text-white/50 focus:outline-none focus:border-blue-300/70"
             />
             <button
@@ -50,6 +62,11 @@ export default function Hero() {
               申请入驻
             </button>
           </form>
+          {error && (
+            <p id="hero-phone-error" role="alert" className="mt-3 text-sm text-red-300">
+              {error}
+            </p>
+          )}
           <p className="mt-4 text-sm text-white/55">
             一人公司在此起步 · 申请审核周期 3–5 个工作日
           </p>
